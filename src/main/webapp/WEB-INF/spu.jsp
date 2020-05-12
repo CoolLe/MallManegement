@@ -29,7 +29,7 @@
                     $("#class_2_select").append("<option value="+json.id+">"+json.flmch2+"</option>");
                 });
             });
-            get_tm(class_1_id)
+            get_tm(class_1_id);
         }
 
         function get_tm(class_1_id) {

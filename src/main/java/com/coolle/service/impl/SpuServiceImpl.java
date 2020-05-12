@@ -28,4 +28,13 @@ public class SpuServiceImpl implements SpuService {
         map.put("list_image",list_image);
         spuRepository.insert_images(map);
     }
+
+    @Override
+    public List<MALL_PRODUCT> get_spu_list(int pp_id, int flbh2) {
+        Map<Object,Object> map = new HashMap<Object, Object>();
+        map.put("pp_id",pp_id);
+        map.put("flbh2",flbh2);
+        List<MALL_PRODUCT> list_spu = spuRepository.select_spu_list(map);
+        return list_spu;
+    }
 }

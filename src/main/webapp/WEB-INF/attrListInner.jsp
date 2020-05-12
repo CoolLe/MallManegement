@@ -18,6 +18,7 @@
         <c:forEach items="${attr.list_value}" var="val">
             ${val.shxzh}${val.shxzh_mch}
         </c:forEach>
+        <br>
     </c:forEach>
 </body>
 </html>
