@@ -1,42 +1,47 @@
 [
     {
-        "id" : 30,
-        "ppmch" : "爱国者"
+        "id" : 61,
+        "flmch2" : "手机",
+        "flbh1" : 6
     },
     {
-        "id" : 31,
-        "ppmch" : "小米"
+        "id" : 62,
+        "flmch2" : "音响",
+        "flbh1" : 6
     },
     {
-        "id" : 32,
-        "ppmch" : "魅族"
+        "id" : 63,
+        "flmch2" : "相机",
+        "flbh1" : 6
     },
     {
-        "id" : 33,
-        "ppmch" : "三星"
+        "id" : 64,
+        "flmch2" : "耳机",
+        "flbh1" : 6
     },
     {
-        "id" : 34,
-        "ppmch" : "华为"
+        "id" : 65,
+        "flmch2" : "传真机",
+        "flbh1" : 6
     },
     {
-        "id" : 35,
-        "ppmch" : "荣耀"
+        "id" : 66,
+        "flmch2" : "电视机",
+        "flbh1" : 6
     },
     {
-        "id" : 36,
-        "ppmch" : "索尼"
+        "id" : 67,
+        "flmch2" : "机顶盒",
+        "flbh1" : 6
     },
     {
-        "id" : 37,
-        "ppmch" : "联想"
+        "id" : 68,
+        "flmch2" : "手推车",
+        "flbh1" : 6
     },
     {
-        "id" : 38,
-        "ppmch" : "OPPO"
-    },
-    {
-        "id" : 39,
-        "ppmch" : "VIVO"
+        "id" : 69,
+        "flmch2" : "婴儿床上用品",
+        "flbh1" : 6
     }
 ]

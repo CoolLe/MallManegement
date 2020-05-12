@@ -33,9 +33,9 @@
 
         function show_val(attr_id,checked) {
             if(checked) {
-                $("#val_"+${attr_id}).show();
+                $("#val_"+attr_id).show();
             } else {
-                $("#val_"+${attr_id}).hide();
+                $("#val_"+attr_id).hide();
             }
         }
     </script>
