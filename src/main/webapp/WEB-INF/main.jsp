@@ -11,19 +11,52 @@
     <title>后台管理系统</title>
     <meta charset="UTF-8">
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="js/easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="js/easyui/themes/bootstrap/easyui.css">
     <link rel="stylesheet" type="text/css" href="js/easyui/themes/icon.css">
     <script type="text/javascript" src="js/easyui/jquery.easyui.min.js"></script>
+    <script>
+        function add_tab(url,title) {
+            $('#tt').tabs('add',{
+                title:title,
+                href:url,
+                closable:true,
+                tools:[{
+                    iconCls:'icon-mini-refresh',
+                    handler:function () {
+                        alert('refresh');
+                    }
+                }]
+            });
+        }
+    </script>
 </head>
 <body class="easyui-layout">
     <div data-options="region:'north',border:false" style="height:60px;background:#B3DFDA;padding:10px">
         north region
     </div>
-    <div data-options="region:'west',split:true,title:'West'" style="width:150px;padding:10px;">
-        <a href="goto_spu.do" target="_blank">商品信息管理</a><br>
-        <a href="goto_attr.do" target="_blank">商品属性管理</a><br>
-        <a href="goto_sku.do" target="_blank">商品库存单元管理</a><br>
-        <a href="goto_spu.do" target="_blank">商品缓存管理</a><br>
+    <div data-options="region:'west',split:true,title:'West'" style="width:200px;padding:10px;">
+        <div class="easyui-accordion" style="width:180px">
+            <div title="About" data-options="iconCls:'icon-ok'">
+                <ul>
+                    <li>
+                        <a href="javascript:add_tab('goto_spu.do','商品信息管理')">商品信息管理</a>
+                    </li>
+                    <li>
+                        <a href="javascript:add_tab('goto_attr.do','商品属性管理')">商品属性管理</a>
+                    </li>
+                    <li>
+                        <a href="javascript:add_tab('goto_sku.do','商品属性管理')">商品库存单元管理</a>
+                    </li>
+                </ul>
+            </div>
+            <div title="About" data-options="iconCls:'icon-ok'">
+                <ul>
+                    <li>
+                        <a href="goto_spu.do" target="_blank">商品缓存管理</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
     <div data-options="region:'east',split:true,collapsed:true,title:'East'" style="width:100px;padding:10px;">
         east region
@@ -31,6 +64,10 @@
     <div data-options="region:'south',border:false" style="height:50px;background:#A9FACD;padding:10px;">
         south region
     </div>
-    <div data-options="region:'center',title:'Center'"></div>
+    <div data-options="region:'center',title:'Center'">
+        <div id="tt" class="easyui-tabs">
+
+        </div>
+    </div>
 </body>
 </html>

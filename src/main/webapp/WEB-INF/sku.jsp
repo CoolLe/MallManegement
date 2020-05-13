@@ -10,6 +10,17 @@
 <head>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>管理系统</title>
+</head>
+<body>
+    sku商品信息管理
+    <hr>
+    一级分类：<select id="sku_class_1_select" onchange="get_class_2(this.value)"><option>请选择分类</option></select>
+    二级分类：<select id="sku_class_2_select"><option>请选择分类</option></select>
+    查询<br>
+    <a href="javascript:goto_sku_add();" >添加</a><br>
+    删除<br>
+    修改<br>
     <script>
         $(function () {
             $.getJSON("js/json/class_1.js",function (data) {
@@ -35,16 +46,5 @@
                 +"&flbh2=" +class_2_id;
         }
     </script>
-    <title>管理系统</title>
-</head>
-<body>
-    sku商品信息管理
-    <hr>
-    一级分类：<select id="sku_class_1_select" onchange="get_class_2(this.value)"><option>请选择分类</option></select>
-    二级分类：<select id="sku_class_2_select"><option>请选择分类</option></select>
-    查询<br>
-    <a href="javascript:goto_sku_add();" >添加</a><br>
-    删除<br>
-    修改<br>
 </body>
 </html>

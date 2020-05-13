@@ -13,6 +13,18 @@
 <%--    <base href="<%=basePath %>">--%>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>spu商品信息管理</title>
+</head>
+<body>
+    SPU商品信息管理页面
+    <hr>
+    一级分类：<select id="class_1_select" onchange="get_class_2(this.value)"><option>请选择分类</option></select>
+    二级分类：<select id="class_2_select"><option>请选择分类</option></select>
+    商标分类：<select id="class_tm_select"><option>请选择分类</option></select><br>
+    查询<br>
+    <a href="javascript:goto_spu_add();" >添加</a><br>
+    删除<br>
+    修改<br>
     <script type="text/javascript">
         $(function () {
             $.getJSON("js/json/class_1.js",function (data) {
@@ -21,7 +33,7 @@
                 });
             });
         });
-        
+
         function get_class_2(class_1_id) {
             $.getJSON("js/json/class_2_"+class_1_id+".js",function (data) {
                 $("#class_2_select").empty();
@@ -50,17 +62,5 @@
                 +"&pp_id=" +tm_id;
         }
     </script>
-    <title>spu商品信息管理</title>
-</head>
-<body>
-    SPU商品信息管理页面
-    <hr>
-    一级分类：<select id="class_1_select" onchange="get_class_2(this.value)"><option>请选择分类</option></select>
-    二级分类：<select id="class_2_select"><option>请选择分类</option></select>
-    商标分类：<select id="class_tm_select"><option>请选择分类</option></select><br>
-    查询<br>
-    <a href="javascript:goto_spu_add();" >添加</a><br>
-    删除<br>
-    修改<br>
 </body>
 </html>
