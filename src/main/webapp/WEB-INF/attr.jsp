@@ -22,7 +22,9 @@
     删除<br>
     修改<br>
     <hr>
-    <div id="attrListInner"></div>
+    <div id="attrListInner" class="easyui-datagrid">
+
+    </div>
     <script type="text/javascript">
         $(function () {
             $.getJSON("js/json/class_1.js",function (data) {
@@ -48,10 +50,37 @@
 
         function get_attr_list(flbh2) {
             //异步查询
-            $.post("get_attr_list.do",{flbh2:flbh2},function (data) {
-                $("#attrListInner").html(data);
-            })
+            // $.post("get_attr_list.do",{flbh2:flbh2},function (data) {
+            //     $("#attrListInner").html(data);
+            // })
+
+            $('#attrListInner').datagrid({
+                url:'get_attr_list_json.do',
+                queryParams:{
+                    flbh2:flbh2
+                },
+                columns:[[
+                    {field:'id',title:'id',width:100},
+                    {field:'shxm_mch',title:'属性名',width:100},
+                    {field:'list_value',title:'属性值',width:100,
+                        formatter:function (value,row,index) {
+                            var str = "";
+                            $(value).each(function (i,json) {
+                                str = str + json.shxzh + json.shxzh_mch + " ";
+                            });
+                            return str;
+                        }},
+                    {field: 'creat_time', title: '创建时间', width: 100,
+                        formatter: function (value, row, index) {
+                            var d = new Date(value);
+                            var str = d.toLocaleString();
+                            return str;
+                        }
+                    }
+                ]]
+            });
         }
+
     </script>
 </body>
 </html>

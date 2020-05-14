@@ -16,17 +16,22 @@
     <script type="text/javascript" src="js/easyui/jquery.easyui.min.js"></script>
     <script>
         function add_tab(url,title) {
-            $('#tt').tabs('add',{
-                title:title,
-                href:url,
-                closable:true,
-                tools:[{
-                    iconCls:'icon-mini-refresh',
-                    handler:function () {
-                        alert('refresh');
-                    }
-                }]
-            });
+            var b = $('#tt').tabs('exists',title);
+            if(!b) {
+                $('#tt').tabs('add', {
+                    title: title,
+                    href: url,
+                    closable: true,
+                    tools: [{
+                        iconCls: 'icon-mini-refresh',
+                        handler: function () {
+                            alert('refresh');
+                        }
+                    }]
+                });
+            } else {
+                $('#tt').tabs('select', title);
+            }
         }
     </script>
 </head>
@@ -45,7 +50,7 @@
                         <a href="javascript:add_tab('goto_attr.do','商品属性管理')">商品属性管理</a>
                     </li>
                     <li>
-                        <a href="javascript:add_tab('goto_sku.do','商品属性管理')">商品库存单元管理</a>
+                        <a href="javascript:add_tab('goto_sku.do','商品库存单元管理')">商品库存单元管理</a>
                     </li>
                 </ul>
             </div>

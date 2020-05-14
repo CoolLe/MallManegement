@@ -11,6 +11,34 @@
     <head>
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>管理系统</title>
+    </head>
+    <body>
+        skuAdd页面<br>
+        <form action="sava_sku.do">
+            <input type="hidden" value="${flbh1}" name="flbh1">
+            <input type="hidden" value="${flbh2}" name="flbh2">
+            品牌：<select id="sku_tm_select" name="pp_id" onchange="get_spu_list(this.value)"></select>
+            商品：<select id="spu_list" name="id"></select>
+            <hr>
+            分类属性：<br>
+            <c:forEach items="${list_attr}" var="attr" varStatus="status">
+                <input value="${attr.id}" type="checkbox" name="list_attr[${status.index}].shxm_id" onclick="show_val(${attr.id},this.checked)"/>${attr.shxm_mch}:
+            </c:forEach>
+            <br>
+            <c:forEach items="${list_attr}" var="attr" varStatus="status">
+                <div id="val_${attr.id}" style="display: none;">
+                    <c:forEach items="${attr.list_value}" var="val">
+                        <input value="${val.id}" type="radio" name="list_attr[${status.index}].shxzh_id"/>${val.shxzh}${val.shxzh_mch}
+                    </c:forEach>
+                </div>
+            </c:forEach>
+            商品库存名称：<input type="text" name="sku_mch"/><br>
+            商品库存数量：<input type="text" name="kc"/><br>
+            商品库存价格：<input type="text" name="jg"/><br>
+            商品库存地址：<input type="text" name="kcdz"/><br>
+            <input type="submit" value="添加">
+        </form>
         <script type="text/javascript">
             $(function () {
                 var flbh1 = "${flbh1}";
@@ -40,33 +68,5 @@
                 }
             }
         </script>
-        <title>管理系统</title>
-    </head>
-    <body>
-        skuAdd页面<br>
-        <form action="sava_sku.do">
-            <input type="hidden" value="${flbh1}" name="flbh1">
-            <input type="hidden" value="${flbh2}" name="flbh2">
-            品牌：<select id="sku_tm_select" name="pp_id" onchange="get_spu_list(this.value)"></select>
-            商品：<select id="spu_list" name="id"></select>
-            <hr>
-            分类属性：<br>
-            <c:forEach items="${list_attr}" var="attr" varStatus="status">
-                <input value="${attr.id}" type="checkbox" name="list_attr[${status.index}].shxm_id" onclick="show_val(${attr.id},this.checked)"/>${attr.shxm_mch}:
-            </c:forEach>
-            <br>
-            <c:forEach items="${list_attr}" var="attr" varStatus="status">
-                <div id="val_${attr.id}" style="display: none;">
-                    <c:forEach items="${attr.list_value}" var="val">
-                        <input value="${val.id}" type="radio" name="list_attr[${status.index}].shxzh_id"/>${val.shxzh}${val.shxzh_mch}
-                    </c:forEach>
-                </div>
-            </c:forEach>
-            商品库存名称：<input type="text" name="sku_mch"/><br>
-            商品库存数量：<input type="text" name="kc"/><br>
-            商品库存价格：<input type="text" name="jg"/><br>
-            商品库存地址：<input type="text" name="kcdz"/><br>
-            <input type="submit" value="添加">
-        </form>
     </body>
 </html>

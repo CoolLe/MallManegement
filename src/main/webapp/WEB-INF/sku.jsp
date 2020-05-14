@@ -17,6 +17,7 @@
     <hr>
     一级分类：<select id="sku_class_1_select" onchange="get_class_2(this.value)"><option>请选择分类</option></select>
     二级分类：<select id="sku_class_2_select"><option>请选择分类</option></select>
+    <br>
     查询<br>
     <a href="javascript:goto_sku_add();" >添加</a><br>
     删除<br>
