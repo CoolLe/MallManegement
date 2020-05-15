@@ -13,25 +13,54 @@
     <title>商城管理系统</title>
 </head>
 <body>
-    商品属性信息管理页面
-    <hr>
-    一级分类：<select id="attr_class_1_select" onchange="get_attr_class_2(this.value)"><option>请选择分类</option></select>
-    二级分类：<select id="attr_class_2_select" onchange="get_attr_list(this.value)"><option>请选择分类</option></select><br>
-    查询<br>
-    <a href="javascript:goto_attr_add();" >添加</a><br>
-    删除<br>
-    修改<br>
-    <hr>
-    <div id="attrListInner" class="easyui-datagrid">
-
+    <div class="easyui-layout" data-options="fit:true">
+        <div data-options="region:'north',split:true" style="height:50px">
+            <div style="margin-top: 10px;margin-left:10px">
+                一级分类：<select data-options='width:200' class="easyui-combobox" id="attr_class_1_select" onchange="get_attr_class_2(this.value)"><option>请选择分类</option></select>
+                二级分类：<select data-options='width:200' class="easyui-combobox" id="attr_class_2_select" onchange="get_attr_list(this.value)"><option>请选择分类</option></select>
+                <a href="javascript:goto_attr_add();" >添加</a><br>
+            </div>
+        </div>
+        <div data-options="region:'west',split:true" style="width:100px">
+            查询<br>
+            删除<br>
+            修改<br>
+        </div>
+        <div data-options="region:'center'">
+            <div id="attrListInner" class="easyui-datagrid"></div>
+        </div>
     </div>
+
     <script type="text/javascript">
         $(function () {
-            $.getJSON("js/json/class_1.js",function (data) {
-                $(data).each(function (i,json) {
-                    $("#attr_class_1_select").append("<option value="+json.id+">"+json.flmch1+"</option>");
-                });
-            });
+            // $.getJSON("js/json/class_1.js",function (data) {
+            //     $(data).each(function (i,json) {
+            //         $("#attr_class_1_select").append("<option value="+json.id+">"+json.flmch1+"</option>");
+            //     });
+            // });
+            $('#attr_class_1_select').combobox({
+                url: 'js/json/class_1.js',
+                valueField:'id',
+                textField:'flmch1',
+                onChange:function get_attr_class_2() {
+                    var class_1_id = $(this).combobox('getValue');
+                    // $.getJSON("js/json/class_2_"+class_1_id+".js",function (data) {
+                    //     $("#attr_class_2_select").empty();
+                    //     $(data).each(function (i,json) {
+                    //         $("#attr_class_2_select").append("<option value="+json.id+">"+json.flmch2+"</option>");
+                    //     });
+                    // });
+                    $('#attr_class_2_select').combobox({
+                        url: "js/json/class_2_"+class_1_id+".js",
+                        valueField: 'id',
+                        textField: 'flmch2',
+                        onChange:function () {
+                            var flbh2 = $(this).combobox('getValue');
+                            get_attr_list_json(flbh2);
+                        }
+                    });
+                }
+            })
         });
 
         function get_attr_class_2(attr_class_1_id) {
@@ -44,16 +73,19 @@
         }
 
         function goto_attr_add() {
-            var class_2_id = $("#attr_class_2_select").val();
-            window.location.href="goto_attr_add.do?flbh2=" +class_2_id;
+            var class_2_id = $("#attr_class_2_select").combobox('getValue');
+            //window.location.href="goto_attr_add.do?flbh2=" +class_2_id;
+            add_tab("goto_attr_add.do?flbh2=" +class_2_id,"添加属性");
         }
 
         function get_attr_list(flbh2) {
+            异步查询
+            $.post("get_attr_list.do",{flbh2:flbh2},function (data) {
+                $("#attrListInner").html(data);
+            })
+        }
+        function get_attr_list_json(flbh2) {
             //异步查询
-            // $.post("get_attr_list.do",{flbh2:flbh2},function (data) {
-            //     $("#attrListInner").html(data);
-            // })
-
             $('#attrListInner').datagrid({
                 url:'get_attr_list_json.do',
                 queryParams:{

@@ -15,6 +15,15 @@
     <link rel="stylesheet" type="text/css" href="js/easyui/themes/icon.css">
     <script type="text/javascript" src="js/easyui/jquery.easyui.min.js"></script>
     <script>
+
+        $(function () {
+            var url = "${url}";
+            var title = "${title}";
+            if (url != "" && title != "") {
+                add_tab(url,title);
+            }
+        });
+
         function add_tab(url,title) {
             var b = $('#tt').tabs('exists',title);
             if(!b) {
@@ -70,7 +79,7 @@
         south region
     </div>
     <div data-options="region:'center',title:'Center'">
-        <div id="tt" class="easyui-tabs">
+        <div id="tt" class="easyui-tabs" style="height: 500px">
 
         </div>
     </div>
