@@ -46,9 +46,9 @@
 </head>
 <body class="easyui-layout">
     <div data-options="region:'north',border:false" style="height:60px;background:#B3DFDA;padding:10px">
-        north region
+        <h3>Mall后台管理系统</h3>
     </div>
-    <div data-options="region:'west',split:true,title:'West'" style="width:200px;padding:10px;">
+    <div data-options="region:'west',split:true,title:'管理选择'" style="width:200px;padding:10px;">
         <div class="easyui-accordion" style="width:180px">
             <div title="About" data-options="iconCls:'icon-ok'">
                 <ul>
@@ -72,13 +72,10 @@
             </div>
         </div>
     </div>
-    <div data-options="region:'east',split:true,collapsed:true,title:'East'" style="width:100px;padding:10px;">
+    <div data-options="region:'east',split:true,collapsed:true,title:'帮助'" style="width:100px;padding:10px;">
         east region
     </div>
-    <div data-options="region:'south',border:false" style="height:50px;background:#A9FACD;padding:10px;">
-        south region
-    </div>
-    <div data-options="region:'center',title:'Center'">
+    <div data-options="region:'center',title:'主页面'">
         <div id="tt" class="easyui-tabs" style="height: 500px">
 
         </div>

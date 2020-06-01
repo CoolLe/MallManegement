@@ -18,11 +18,11 @@
             <div style="margin-top: 10px;margin-left:10px">
                 一级分类：<select data-options='width:200' class="easyui-combobox" id="attr_class_1_select" onchange="get_attr_class_2(this.value)"><option>请选择分类</option></select>
                 二级分类：<select data-options='width:200' class="easyui-combobox" id="attr_class_2_select" onchange="get_attr_list(this.value)"><option>请选择分类</option></select>
-                <a href="javascript:goto_attr_add();" >添加</a><br>
             </div>
         </div>
         <div data-options="region:'west',split:true" style="width:100px">
             查询<br>
+            <a href="javascript:goto_attr_add();" >添加</a><br>
             删除<br>
             修改<br>
         </div>
@@ -33,23 +33,12 @@
 
     <script type="text/javascript">
         $(function () {
-            // $.getJSON("js/json/class_1.js",function (data) {
-            //     $(data).each(function (i,json) {
-            //         $("#attr_class_1_select").append("<option value="+json.id+">"+json.flmch1+"</option>");
-            //     });
-            // });
             $('#attr_class_1_select').combobox({
                 url: 'js/json/class_1.js',
                 valueField:'id',
                 textField:'flmch1',
                 onChange:function get_attr_class_2() {
                     var class_1_id = $(this).combobox('getValue');
-                    // $.getJSON("js/json/class_2_"+class_1_id+".js",function (data) {
-                    //     $("#attr_class_2_select").empty();
-                    //     $(data).each(function (i,json) {
-                    //         $("#attr_class_2_select").append("<option value="+json.id+">"+json.flmch2+"</option>");
-                    //     });
-                    // });
                     $('#attr_class_2_select').combobox({
                         url: "js/json/class_2_"+class_1_id+".js",
                         valueField: 'id',
@@ -74,6 +63,7 @@
 
         function goto_attr_add() {
             var class_2_id = $("#attr_class_2_select").combobox('getValue');
+            console.log(class_2_id);
             //window.location.href="goto_attr_add.do?flbh2=" +class_2_id;
             add_tab("goto_attr_add.do?flbh2=" +class_2_id,"添加属性");
         }

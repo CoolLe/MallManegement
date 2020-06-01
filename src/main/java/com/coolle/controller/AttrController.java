@@ -49,8 +49,7 @@ public class AttrController {
 
         //保存属性
         attrService.save_attr(flbh2,list_attr.getList_attr());
-        ModelAndView modelAndView = new ModelAndView("redirect:/index.do"); //goto_attr_add
-        //modelAndView.addObject("flbh2",flbh2);
+        ModelAndView modelAndView = new ModelAndView("redirect:/index.do");
         modelAndView.addObject("url","goto_attr_add.do?flbh2="+flbh2);
         modelAndView.addObject("title","添加属性");
         return modelAndView;

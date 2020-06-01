@@ -15,4 +15,10 @@ public interface SpuRepository {
     void insert_images(Map<Object, Object> map);
 
     List<MALL_PRODUCT> select_spu_list(Map<Object, Object> map);
+
+    List<MALL_PRODUCT> select_all_spu();
+
+    void deleteById(int id);
+
+    void update(MALL_PRODUCT mall_product);
 }

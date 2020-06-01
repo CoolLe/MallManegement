@@ -28,9 +28,9 @@ public class SkuController {
 
         skuService.save_sku(sku,spu,list_attr.getList_attr());
 
-        ModelAndView modelAndView = new ModelAndView("redirect:/goto_sku_add.do");
-        modelAndView.addObject("flbh1",spu.getFlbh1());
-        modelAndView.addObject("flbh2",spu.getFlbh2());
+        ModelAndView modelAndView = new ModelAndView("redirect:/index.do");
+        modelAndView.addObject("url","goto_sku_add.do?flbh1="+spu.getFlbh1()+"&flbh2="+spu.getFlbh2());
+        modelAndView.addObject("title","SKU添加页面");
         return modelAndView;
     }
 

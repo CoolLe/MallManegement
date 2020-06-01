@@ -3,6 +3,23 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.coolle.repository.SpuRepository">
 
+    <update id="update" parameterType="com.coolle.entity.MALL_PRODUCT">
+        UPDATE mall_product
+        <trim prefix="set" suffixOverrides=",">
+            <if test="shp_mch!=null">shp_mch=#{shp_mch},</if>
+            <if test="shp_msh!=null">shp_msh=#{shp_msh},</if>
+        </trim>
+        WHERE id=#{id}
+    </update>
+
+    <delete id="deleteById" parameterType="int">
+        delete from mall_product where id = #{id}
+    </delete>
+
+    <select id="select_all_spu" parameterType="Map" resultType="com.coolle.entity.MALL_PRODUCT">
+        select * from mall_product
+    </select>
+
     <select id="select_spu_list" parameterType="Map" resultType="com.coolle.entity.MALL_PRODUCT">
         select * from mall_product where pp_id = #{pp_id} and flbh2 = #{flbh2}
     </select>

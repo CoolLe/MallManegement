@@ -37,4 +37,23 @@ public class SpuServiceImpl implements SpuService {
         List<MALL_PRODUCT> list_spu = spuRepository.select_spu_list(map);
         return list_spu;
     }
+
+    @Override
+    public List<MALL_PRODUCT> select_spu() {
+
+        List<MALL_PRODUCT> list_spu = spuRepository.select_all_spu();
+        return list_spu;
+    }
+
+    @Override
+    public void delete_spu_by_id(int id) {
+        spuRepository.deleteById(id);
+    }
+
+    @Override
+    public void update_spu(MALL_PRODUCT mall_product) {
+        spuRepository.update(mall_product);
+    }
+
+
 }
