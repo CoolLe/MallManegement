@@ -35,36 +35,37 @@
                 <thead>
                 <tr>
                     <th field="id" width="50">id</th>
-                    <th field="shp_mch" width="50">商品名称</th>
-                    <th field="flbh1" width="50">分类编号1</th>
-                    <th field="flbh2" width="50">分类编号2</th>
-                    <th field="pp_id" width="50">商品id</th>
-                    <th field="creat_time" width="50">创建时间</th>
+                    <th field="shp_mch" width="60">商品名称</th>
+                    <th field="shp_msh" width="80">商品描述</th>
+                    <th field="flbh1" width="20">分类编号1</th>
+                    <th field="flbh2" width="20">分类编号2</th>
+                    <th field="pp_id" width="20">商品id</th>
+                    <th field="creat_time" width="50" >创建时间</th>
                 </tr>
                 </thead>
             </table>
             <div id="toolbar">
-                <a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editUser()">Edit User</a>
-                <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroy()">Remove User</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editSpu()">修改</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroySpu()">删除</a>
             </div>
 
             <div id="dlg" class="easyui-dialog" style="width:400px;height:280px;padding:10px 20px"
                  closed="true" buttons="#dlg-buttons">
                 <div class="ftitle">商品信息修改</div>
                 <form id="fm" method="post">
-                    <div class="fitem">
+                    <div class="fitem" style="width: auto;height: 40px">
                         <label>商品名称：</label>
-                        <input name="shp_mch" class="easyui-validatebox" required="true">
+                        <input name="shp_mch" class="easyui-validatebox" style="width: 270px;height: 35px" required="true">
                     </div>
-                    <div class="fitem">
+                    <div class="fitem" style="width: auto;height: 60px">
                         <label>商品描述：</label>
-                        <input name="shp_msh" class="easyui-validatebox" required="true">
+                        <input name="shp_msh" class="easyui-validatebox" style="width: 270px;height: 35px" required="true">
                     </div>
                 </form>
             </div>
             <div id="dlg-buttons">
-                <a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveUser()">Save</a>
-                <a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')">Cancel</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveSpu()">保存</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')">取消</a>
             </div>
         </div>
     </div>
@@ -94,10 +95,10 @@
             })
         });
 
-        function destroy(){
+        function destroySpu(){
             var row = $('#dg').datagrid('getSelected');
             if (row){
-                $.messager.confirm('Confirm','Are you sure you want to destroy this user?',function(r){
+                $.messager.confirm('通知','确定要删除当前选中的数据吗?',function(r){
                     if (r){
                         $.post('delete_spu.do',{id:row.id},function(result){
                             if (result){
@@ -105,29 +106,29 @@
                             } else {
                                 $.messager.show({    // show error message
                                     title: 'Error',
-                                    msg: 删除失败
+                                    msg: "删除失败"
                                 });
                             }
                         },'json');
                     }
                 });
             } else {
-                alert("请选择一个用户操作")
+                alert("请选择一条数据操作")
             }
         }
 
-        function editUser(){
+        function editSpu(){
             var row = $('#dg').datagrid('getSelected');
             if (row){
-                $('#dlg').dialog('open').dialog('setTitle','Edit User');
+                $('#dlg').dialog('open').dialog('setTitle','修改信息');
                 $('#fm').form('load',row);
                 url = 'update.do?id='+row.id;
             } else {
-                alert("请选择一个用户操作")
+                alert("请选择一条数据操作")
             }
         }
 
-        function saveUser(){
+        function saveSpu(){
             console.log(url)
             $('#fm').form('submit',{
                 url: url,

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +21,17 @@ public class AttrController {
     @Autowired
     AttrService attrService;
 
+    @RequestMapping("delete_attr")
+    @ResponseBody
+    public boolean delete_attr(HttpServletRequest request){
+        String id = request.getParameter("id");
+        if(id!=null) {
+            attrService.delete_attr_by_id(Integer.parseInt(id));
+            return true;
+        }
+        return false;
+    }
+
     @RequestMapping("get_attr_list_json")
     @ResponseBody
     public List<OBJECT_MALL_ATTR> get_attr_list_json(int flbh2,ModelMap map){
@@ -28,15 +40,15 @@ public class AttrController {
         return list_attr;
     }
 
-    @RequestMapping("get_attr_list")
-    public String get_attr_list(int flbh2,ModelMap map){
-
-        List<OBJECT_MALL_ATTR> list_attr = new ArrayList<OBJECT_MALL_ATTR>();
-        list_attr = attrService.get_attr_list(flbh2);
-        map.put("list_attr",list_attr);
-        map.put("flbh2",flbh2);
-        return "attrListInner";
-    }
+//    @RequestMapping("get_attr_list")
+//    public String get_attr_list(int flbh2,ModelMap map){
+//
+//        List<OBJECT_MALL_ATTR> list_attr = new ArrayList<OBJECT_MALL_ATTR>();
+//        list_attr = attrService.get_attr_list(flbh2);
+//        map.put("list_attr",list_attr);
+//        map.put("flbh2",flbh2);
+//        return "attrListInner";
+//    }
 
     @RequestMapping("goto_attr_add")
     public String goto_attr_add(int flbh2,ModelMap map){

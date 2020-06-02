@@ -18,8 +18,11 @@
         <form action="sava_sku.do">
             <input type="hidden" value="${flbh1}" name="flbh1">
             <input type="hidden" value="${flbh2}" name="flbh2">
-            品牌：<select id="sku_tm_select" name="pp_id" onchange="get_spu_list(this.value)"></select>
-            商品：<select id="spu_list" name="id"></select>
+
+            品牌：<select data-options='width:200' class="easyui-combobox" id="sku_tm_select" name="pp_id" ><option>请选择分类</option></select>
+            商品：<select data-options='width:200' class="easyui-combobox" id="spu_list" name="id"><option>请选择分类</option></select>
+<%--            品牌：<select id="sku_tm_select" name="pp_id" onchange="get_spu_list(this.value)"></select>--%>
+<%--            商品：<select id="spu_list" name="id"></select>--%>
             <hr>
             分类属性：<br>
             <c:forEach items="${list_attr}" var="attr" varStatus="status">
@@ -31,7 +34,7 @@
                     <c:forEach items="${attr.list_value}" var="val">
                         <input value="${val.id}" type="radio" name="list_attr[${status.index}].shxzh_id"/>${val.shxzh}${val.shxzh_mch}
                     </c:forEach>
-                </div>
+                </div><br>
             </c:forEach>
             商品库存名称：<input type="text" name="sku_mch"/><br>
             商品库存数量：<input type="text" name="kc"/><br>
@@ -40,6 +43,25 @@
             <input type="submit" value="添加">
         </form>
         <script type="text/javascript">
+
+            $(function () {
+                var flbh1 = "${flbh1}";
+                var flbh2 = "${flbh2}";
+                $('#sku_tm_select').combobox({
+                    url: "js/json/tm_class_1_"+flbh1+".js",
+                    valueField: 'id',
+                    textField: 'ppmch',
+                    onChange:function get_spu_list() {
+                        var pp_id = $(this).combobox('getValue');
+                        $('#spu_list').combobox({
+                            url: "get_spu_list.do?pp_id="+pp_id+"&flbh2="+flbh2,
+                            valueField: 'id',
+                            textField: 'shp_mch'
+                        });
+                    }
+                })
+            });
+
             $(function () {
                 var flbh1 = "${flbh1}";
                 $.getJSON("js/json/tm_class_1_"+flbh1+".js",function (data) {

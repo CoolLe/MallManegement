@@ -13,4 +13,8 @@ public interface AttrRepository {
     void insert_values(@Param("attr_id") int attr_id, @Param("list_value")List<MALL_VALUE> list_value);
 
     List<OBJECT_MALL_ATTR> select_attr_list(int flbh2);
+
+    void delete_attr(int id);
+
+    void delete_values(int id);
 }

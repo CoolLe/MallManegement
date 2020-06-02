@@ -17,13 +17,13 @@
         <div data-options="region:'north',split:true" style="height:50px">
             <div style="margin-top: 10px;margin-left:10px">
                 一级分类：<select data-options='width:200' class="easyui-combobox" id="attr_class_1_select" onchange="get_attr_class_2(this.value)"><option>请选择分类</option></select>
-                二级分类：<select data-options='width:200' class="easyui-combobox" id="attr_class_2_select" onchange="get_attr_list(this.value)"><option>请选择分类</option></select>
+                二级分类：<select data-options='width:200' class="easyui-combobox" id="attr_class_2_select" ><option>请选择分类</option></select>
             </div>
         </div>
         <div data-options="region:'west',split:true" style="width:100px">
             查询<br>
             <a href="javascript:goto_attr_add();" >添加</a><br>
-            删除<br>
+            <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyAttr()">删除</a><br>
             修改<br>
         </div>
         <div data-options="region:'center'">
@@ -68,12 +68,12 @@
             add_tab("goto_attr_add.do?flbh2=" +class_2_id,"添加属性");
         }
 
-        function get_attr_list(flbh2) {
-            异步查询
-            $.post("get_attr_list.do",{flbh2:flbh2},function (data) {
-                $("#attrListInner").html(data);
-            })
-        }
+        // function get_attr_list(flbh2) {
+        //     异步查询
+        //     $.post("get_attr_list.do",{flbh2:flbh2},function (data) {
+        //         $("#attrListInner").html(data);
+        //     })
+        // }
         function get_attr_list_json(flbh2) {
             //异步查询
             $('#attrListInner').datagrid({
@@ -101,6 +101,28 @@
                     }
                 ]]
             });
+        }
+
+        function destroyAttr(){
+            var row = $('#attrListInner').datagrid('getSelected');
+            if (row){
+                $.messager.confirm('通知','确定要删除当前选中的数据吗?',function(r){
+                    if (r){
+                        $.post('delete_attr.do',{id:row.id},function(result){
+                            if (result){
+                                $('#attrListInner').datagrid('reload');    // reload the user data
+                            } else {
+                                $.messager.show({    // show error message
+                                    title: 'Error',
+                                    msg: "删除失败"
+                                });
+                            }
+                        },'json');
+                    }
+                });
+            } else {
+                alert("请选择一条数据操作")
+            }
         }
 
     </script>

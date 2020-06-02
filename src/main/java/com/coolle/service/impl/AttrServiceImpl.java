@@ -30,4 +30,10 @@ public class AttrServiceImpl implements AttrService {
         List<OBJECT_MALL_ATTR> list_attr = attrRepository.select_attr_list(flbh2);
         return list_attr;
     }
+
+    @Override
+    public void delete_attr_by_id(int id) {
+        attrRepository.delete_attr(id);
+        attrRepository.delete_values(id);
+    }
 }

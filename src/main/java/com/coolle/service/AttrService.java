@@ -8,4 +8,6 @@ public interface AttrService {
     void save_attr(int flbh2, List<OBJECT_MALL_ATTR> list_attr);
 
     List<OBJECT_MALL_ATTR> get_attr_list(int flbh2);
+
+    void delete_attr_by_id(int id);
 }

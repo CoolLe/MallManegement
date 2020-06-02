@@ -3,6 +3,14 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.coolle.repository.AttrRepository">
 
+    <delete id="delete_attr" parameterType="int">
+        delete from mall_attr where id = #{id}
+    </delete>
+
+    <delete id="delete_values" parameterType="int">
+        delete from mall_value where shxm_id = #{id}
+    </delete>
+
     <select id="select_attr_list" parameterType="int" resultMap="select_attr_list_map">
         select attr.id as attr_id , attr.* , val.id as val_id , val.*
         from mall_attr attr , mall_value val
