@@ -18,14 +18,8 @@
             <div style="margin-top: 10px;margin-left:10px">
                 一级分类：<select data-options='width:200' class="easyui-combobox" id="sku_class_1_select" onchange="get_class_2(this.value)"><option>请选择分类</option></select>
                 二级分类：<select data-options='width:200' class="easyui-combobox" id="sku_class_2_select"><option>请选择分类</option></select>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="goto_sku_add()">添加新的商品库存信息</a>
             </div>
-        </div>
-
-        <div data-options="region:'west',split:true" style="width:100px">
-            查询<br>
-            <a href="javascript:goto_sku_add();" >添加</a><br>
-            删除<br>
-            修改<br>
         </div>
 
         <div data-options="region:'center'"></div>
@@ -68,11 +62,14 @@
         function goto_sku_add() {
             var class_1_id = $("#sku_class_1_select").combobox('getValue');
             var class_2_id = $("#sku_class_2_select").combobox('getValue');
-            // window.location.href="goto_sku_add.do?flbh1=" +class_1_id
-            //     +"&flbh2=" +class_2_id;
-            url = "goto_sku_add.do?flbh1=" +class_1_id
-                +"&flbh2=" +class_2_id;
-            add_tab(url,"添加SKU属性");
+            if (class_2_id === "请选择分类") {
+                alert("请选择分类");
+            }
+            else {
+                url = "goto_sku_add.do?flbh1=" +class_1_id
+                    +"&flbh2=" +class_2_id;
+                add_tab(url,"添加SKU属性");
+            }
         }
     </script>
 </body>

@@ -1,7 +1,6 @@
 package com.coolle.controller;
 
-import com.coolle.entity.MODEL_MALL_ATTR;
-import com.coolle.entity.OBJECT_MALL_ATTR;
+import com.coolle.entity.*;
 import com.coolle.service.AttrService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +20,46 @@ public class AttrController {
     @Autowired
     AttrService attrService;
 
+    @RequestMapping("add_attr_value")
+    @ResponseBody
+    public boolean add_attr_value(HttpServletRequest request){
+        String id = request.getParameter("id");
+        String shxzh = request.getParameter("shxzh");
+        if(id!=null&&shxzh!=null) {
+            MALL_VALUE mall_value = new MALL_VALUE();
+            mall_value.setShxm_id(Integer.parseInt(id));
+            mall_value.setShxzh(shxzh);
+            mall_value.setShxzh_mch("");
+            attrService.add_attr_value(mall_value);
+            return true;
+        }
+        return false;
+    }
+
+    @RequestMapping("update_attr")
+    @ResponseBody
+    public boolean update_attr(HttpServletRequest request){
+        MODEL_MALL_VALUE model_mall_value = new MODEL_MALL_VALUE();
+        String id = request.getParameter("id");
+        String old_shxzh = request.getParameter("old_shxzh");
+        String shxzh = request.getParameter("shxzh");
+
+        System.out.println(id+old_shxzh+" "+shxzh);
+        if(old_shxzh.equals(shxzh))
+            return true;
+        else if(!old_shxzh.equals("")&&shxzh.equals("")) {
+            attrService.delete_value_by_shxzh(old_shxzh);
+            return true;
+        }
+        else {
+            model_mall_value.setNew_shxzh(shxzh);
+            model_mall_value.setShxm_id(Integer.parseInt(id));
+            model_mall_value.setShxzh(old_shxzh);
+            attrService.update_value(model_mall_value);
+        }
+        return false;
+    }
+
     @RequestMapping("delete_attr")
     @ResponseBody
     public boolean delete_attr(HttpServletRequest request){
@@ -39,16 +78,6 @@ public class AttrController {
         list_attr = attrService.get_attr_list(flbh2);
         return list_attr;
     }
-
-//    @RequestMapping("get_attr_list")
-//    public String get_attr_list(int flbh2,ModelMap map){
-//
-//        List<OBJECT_MALL_ATTR> list_attr = new ArrayList<OBJECT_MALL_ATTR>();
-//        list_attr = attrService.get_attr_list(flbh2);
-//        map.put("list_attr",list_attr);
-//        map.put("flbh2",flbh2);
-//        return "attrListInner";
-//    }
 
     @RequestMapping("goto_attr_add")
     public String goto_attr_add(int flbh2,ModelMap map){

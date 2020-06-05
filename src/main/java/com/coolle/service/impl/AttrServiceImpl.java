@@ -1,5 +1,7 @@
 package com.coolle.service.impl;
 
+import com.coolle.entity.MALL_VALUE;
+import com.coolle.entity.MODEL_MALL_VALUE;
 import com.coolle.entity.OBJECT_MALL_ATTR;
 import com.coolle.repository.AttrRepository;
 import com.coolle.service.AttrService;
@@ -36,4 +38,21 @@ public class AttrServiceImpl implements AttrService {
         attrRepository.delete_attr(id);
         attrRepository.delete_values(id);
     }
+
+    @Override
+    public void delete_value_by_shxzh(String old_shxzh) {
+        attrRepository.delete_values_by_shxzh(old_shxzh);
+    }
+
+    @Override
+    public void update_value(MODEL_MALL_VALUE model_mall_value) {
+        attrRepository.update_value(model_mall_value);
+    }
+
+    @Override
+    public void add_attr_value(MALL_VALUE mall_value) {
+        attrRepository.addValue(mall_value);
+    }
+
+
 }

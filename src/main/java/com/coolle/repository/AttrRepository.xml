@@ -3,6 +3,18 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.coolle.repository.AttrRepository">
 
+    <insert id="addValue" parameterType="com.coolle.entity.MALL_VALUE">
+        insert into mall_value (shxzh,shxm_id,shxzh_mch)values (#{shxzh},#{shxm_id},#{shxzh_mch})
+    </insert>
+
+    <update id="update_value" parameterType="MODEL_MALL_VALUE">
+        update mall_value set shxzh=#{new_shxzh} where shxm_id=#{shxm_id} and shxzh=#{shxzh}
+    </update>
+
+    <delete id="delete_values_by_shxzh" parameterType="string">
+        delete from mall_value where shxzh = #{old_shxzh}
+    </delete>
+
     <delete id="delete_attr" parameterType="int">
         delete from mall_attr where id = #{id}
     </delete>

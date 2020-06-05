@@ -22,7 +22,7 @@ public class SpuController {
     @Autowired
     private SpuService spuService;
 
-    @RequestMapping("update")
+    @RequestMapping("update_spu")
     @ResponseBody
     public boolean update_spu(HttpServletRequest request){
         MALL_PRODUCT mall_product = new MALL_PRODUCT();

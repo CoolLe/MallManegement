@@ -6,8 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%--<%String basePath = request.getScheme() + "://" + request.getServerName() + ":" +request.getServerPort() + request.getContextPath() + "/";%>--%>
-<%String basePath = "localhost:8080/"; %>
 <html>
 <head>
 <%--    <base href="<%=basePath %>">--%>
@@ -49,10 +47,10 @@
                 <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroySpu()">删除</a>
             </div>
 
-            <div id="dlg" class="easyui-dialog" style="width:400px;height:280px;padding:10px 20px"
-                 closed="true" buttons="#dlg-buttons">
+            <div id="spu-dlg" class="easyui-dialog" style="width:400px;height:280px;padding:10px 20px"
+                 closed="true" buttons="#spu-dlg-buttons">
                 <div class="ftitle">商品信息修改</div>
-                <form id="fm" method="post">
+                <form id="spu-fm" method="post">
                     <div class="fitem" style="width: auto;height: 40px">
                         <label>商品名称：</label>
                         <input name="shp_mch" class="easyui-validatebox" style="width: 270px;height: 35px" required="true">
@@ -63,15 +61,11 @@
                     </div>
                 </form>
             </div>
-            <div id="dlg-buttons">
+            <div id="spu-dlg-buttons">
                 <a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveSpu()">保存</a>
-                <a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')">取消</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#spu-dlg').dialog('close')">取消</a>
             </div>
         </div>
-    </div>
-
-
-
     </div>
     <script type="text/javascript">
         $(function () {
@@ -120,24 +114,24 @@
         function editSpu(){
             var row = $('#dg').datagrid('getSelected');
             if (row){
-                $('#dlg').dialog('open').dialog('setTitle','修改信息');
+                $('#spu-dlg').dialog('open').dialog('setTitle','修改信息');
                 $('#fm').form('load',row);
-                url = 'update.do?id='+row.id;
+                url = 'update_spu.do?id='+row.id;
             } else {
-                alert("请选择一条数据操作")
+                alert("请选择一条数据操作");
             }
         }
 
         function saveSpu(){
             console.log(url)
-            $('#fm').form('submit',{
+            $('#spu-fm').form('submit',{
                 url: url,
                 onSubmit: function(){
                     return $(this).form('validate');
                 },
                 success: function(result){
                     if (result){
-                        $('#dlg').dialog('close');		// close the dialog
+                        $('#spu-dlg').dialog('close');		// close the dialog
                         $('#dg').datagrid('reload');	// reload the user data
                     } else {
                         $.messager.show({
@@ -148,41 +142,20 @@
                 }
             });
         }
-        // $(function () {
-        //     $.getJSON("js/json/class_1.js",function (data) {
-        //         $(data).each(function (i,json) {
-        //             $("#class_1_select").append("<option value="+json.id+">"+json.flmch1+"</option>");
-        //         });
-        //     });
-        // });
-        //
-        // function get_class_2(class_1_id) {
-        //     $.getJSON("js/json/class_2_"+class_1_id+".js",function (data) {
-        //         $("#class_2_select").empty();
-        //         $(data).each(function (i,json) {
-        //             $("#class_2_select").append("<option value="+json.id+">"+json.flmch2+"</option>");
-        //         });
-        //     });
-        //     get_tm(class_1_id);
-        // }
-        //
-        // function get_tm(class_1_id) {
-        //     $.getJSON("js/json/tm_class_1_"+class_1_id+".js",function (data) {
-        //         $("#class_tm_select").empty();
-        //         $(data).each(function (i,json) {
-        //             $("#class_tm_select").append("<option value="+json.id+">"+json.ppmch+"</option>");
-        //         });
-        //     });
-        // }
 
         function goto_spu_add() {
             var class_1_id = $("#class_1_select").combobox('getValue');
             var class_2_id = $("#class_2_select").combobox('getValue');
             var tm_id = $("#class_tm_select").combobox('getValue');
-            url = "goto_spu_add.do?flbh1=" +class_1_id
-                +"&flbh2=" +class_2_id
-                +"&pp_id=" +tm_id;
-            add_tab(url,'SPU添加页面');
+            if (tm_id === "请选择分类") {
+                alert("请选择分类");
+            }
+            else {
+                url = "goto_spu_add.do?flbh1=" +class_1_id
+                    +"&flbh2=" +class_2_id
+                    +"&pp_id=" +tm_id;
+                add_tab(url,'SPU添加页面');
+            }
         }
     </script>
 </body>

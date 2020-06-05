@@ -14,7 +14,6 @@
         <title>管理系统</title>
     </head>
     <body>
-        skuAdd页面<br>
         <form action="sava_sku.do">
             <input type="hidden" value="${flbh1}" name="flbh1">
             <input type="hidden" value="${flbh2}" name="flbh2">

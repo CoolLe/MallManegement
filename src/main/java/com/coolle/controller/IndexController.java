@@ -7,6 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class IndexController {
 
+    @RequestMapping("goto_order")
+    public String goto_order(){
+        return "order";
+    }
+
     @RequestMapping("goto_sku")
     public String goto_sku(){
         return "sku";

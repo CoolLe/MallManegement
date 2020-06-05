@@ -1,6 +1,7 @@
 package com.coolle.repository;
 
 import com.coolle.entity.MALL_VALUE;
+import com.coolle.entity.MODEL_MALL_VALUE;
 import com.coolle.entity.OBJECT_MALL_ATTR;
 import org.apache.ibatis.annotations.Param;
 
@@ -17,4 +18,10 @@ public interface AttrRepository {
     void delete_attr(int id);
 
     void delete_values(int id);
+
+    void delete_values_by_shxzh(String old_shxzh);
+
+    void update_value(MODEL_MALL_VALUE model_mall_value);
+
+    void addValue(MALL_VALUE mall_value);
 }

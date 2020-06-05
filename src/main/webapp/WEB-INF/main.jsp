@@ -50,7 +50,7 @@
     </div>
     <div data-options="region:'west',split:true,title:'管理选择'" style="width:200px;padding:10px;">
         <div class="easyui-accordion" style="width:180px">
-            <div title="About" data-options="iconCls:'icon-ok'">
+            <div title="商品信息模块" data-options="iconCls:'icon-ok'">
                 <ul>
                     <li>
                         <a href="javascript:add_tab('goto_spu.do','商品信息管理')">商品信息管理</a>
@@ -63,10 +63,10 @@
                     </li>
                 </ul>
             </div>
-            <div title="About" data-options="iconCls:'icon-ok'">
+            <div title="用户信息模块" data-options="iconCls:'icon-ok'">
                 <ul>
                     <li>
-                        <a href="goto_spu.do" target="_blank">商品缓存管理</a>
+                        <a href="javascript:add_tab('goto_order.do','商品订单管理')">商品订单管理</a>
                     </li>
                 </ul>
             </div>
